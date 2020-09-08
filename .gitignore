@@ -1,0 +1,4 @@
+.idea
+target
+src/resources/jdbc.properties
+src/resources/jdbc.testdb.properties
