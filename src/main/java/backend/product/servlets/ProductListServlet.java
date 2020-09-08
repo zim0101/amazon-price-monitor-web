@@ -1,8 +1,8 @@
 package backend.product.servlets;
 
+
 import backend.product.entity.Product;
 import backend.product.repository.ProductRepositoryImpl;
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,7 +13,8 @@ import java.io.IOException;
 import java.util.Optional;
 import java.util.Set;
 
-@WebServlet(urlPatterns = "/products/list")
+
+@WebServlet(name = "ProductList", urlPatterns = "/products/list")
 public class ProductListServlet extends HttpServlet {
 
     @Override

@@ -81,16 +81,4 @@ public class DBConnector {
     public String getUrl() {
         return this.url;
     }
-
-    public static void main(String[] args) {
-        DBConfig defaultDBConfig = new DBConfig(DatabaseType.DEFAULT);
-        System.out.println(defaultDBConfig.getDatabase());
-        DBConnector dbConnector = new DBConnector(defaultDBConfig.getDatabase());
-        System.out.println(dbConnector.url);;
-//        try (Connection connection = new DBConnector(defaultDBConfig.getDatabase()).connection()) {
-//            System.out.println(connection.isValid(5));
-//        } catch (SQLException | ClassNotFoundException exception) {
-//            exception.printStackTrace();
-//        }
-    }
 }

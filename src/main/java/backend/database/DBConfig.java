@@ -17,7 +17,6 @@ public class DBConfig {
     protected final Map<String, String> database = new HashMap<>();
 
     public DBConfig(DatabaseType db) {
-        // TODO: Remove plain path from codebase. Develop API for that. Its risky.
         Properties jdbcProperty = switch (db) {
             case DEFAULT -> readPropertiesFile(JdbcFilePath.DEFAULT.path);
             case TEST -> readPropertiesFile(JdbcFilePath.TEST.path);
@@ -39,12 +38,12 @@ public class DBConfig {
      * @param properties jdbc properties
      */
     public void setDatabase(Properties properties) {
-        database.put("source", properties.getProperty("default_source"));
-        database.put("host", properties.getProperty("default_host"));
-        database.put("port", properties.getProperty("default_port"));
-        database.put("database", properties.getProperty("default_database"));
-        database.put("username", properties.getProperty("default_username"));
-        database.put("password", properties.getProperty("default_password"));
+        database.put("source", properties.getProperty("source"));
+        database.put("host", properties.getProperty("host"));
+        database.put("port", properties.getProperty("port"));
+        database.put("database", properties.getProperty("database"));
+        database.put("username", properties.getProperty("username"));
+        database.put("password", properties.getProperty("password"));
     }
 
     /**
@@ -60,11 +59,5 @@ public class DBConfig {
             e.printStackTrace();
         }
         return properties;
-    }
-
-    public static void main(String[] args) {
-        DBConfig dbConfig = new DBConfig(DatabaseType.DEFAULT);
-        Map<String, String> primaryDB = dbConfig.getDatabase();
-        System.out.println(primaryDB);
     }
 }
