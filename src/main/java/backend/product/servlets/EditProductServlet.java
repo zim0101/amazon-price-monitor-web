@@ -16,6 +16,13 @@ import java.util.Optional;
 @WebServlet(name = "EditProduct", urlPatterns = "/products/edit")
 public class EditProductServlet extends HttpServlet {
 
+    ProductRepositoryImpl repository;
+
+    @Override
+    public void init() {
+        repository = new ProductRepositoryImpl();
+    }
+
     /**
      * @param request HttpServletRequest
      * @param response HttpServletResponse
@@ -25,7 +32,6 @@ public class EditProductServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        ProductRepositoryImpl repository = new ProductRepositoryImpl();
         int id = Integer.parseInt(request.getParameter("id"));
         Optional<Product> product = repository.findOne(id);
         request.setAttribute("product", product.orElse(null));
@@ -41,7 +47,6 @@ public class EditProductServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws IOException {
-        ProductRepositoryImpl repository = new ProductRepositoryImpl();
         Product product = new Product(
                 Integer.parseInt(request.getParameter("id")),
                 request.getParameter("name"),

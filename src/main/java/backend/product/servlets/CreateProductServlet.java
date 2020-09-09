@@ -15,6 +15,13 @@ import java.io.IOException;
 @WebServlet(name = "CreateProduct", urlPatterns = "/products/create")
 public class CreateProductServlet extends HttpServlet {
 
+    ProductRepositoryImpl repository;
+
+    @Override
+    public void init() {
+        repository = new ProductRepositoryImpl();
+    }
+
     /**
      * @param request HttpServletRequest
      * @param response HttpServletResponse
@@ -36,7 +43,7 @@ public class CreateProductServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws IOException {
-        ProductRepositoryImpl repository = new ProductRepositoryImpl();
+
         Product product = new Product(
                 request.getParameter("name"),
                 Double.parseDouble(request.getParameter("price")),
