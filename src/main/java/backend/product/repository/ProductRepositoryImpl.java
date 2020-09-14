@@ -1,9 +1,9 @@
 package backend.product.repository;
 
 
-import backend.database.DBConfig;
-import backend.database.DBConnector;
-import backend.database.DatabaseType;
+import backend.database.connector.DBConfig;
+import backend.database.connector.DBConnector;
+import backend.database.connector.DatabaseType;
 import backend.product.entity.Product;
 import backend.product.query.ProductQuery;
 import org.slf4j.Logger;
