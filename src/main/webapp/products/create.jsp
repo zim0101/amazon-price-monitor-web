@@ -1,7 +1,10 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ include file="/layouts/header.jsp" %>
+<%@ include file="/layouts/navbar.jsp" %>
     <div class="container">
-        <%@ include file="/layouts/navbar.jsp" %>
+        <div class="page-section">
+            <h4>Entry Product</h4>
+        </div>
         <form method="post">
             <div class="form-group">
                 <label for="name">Name</label>
@@ -27,3 +30,4 @@
         </form>
     </div>
 <%@ include file="/layouts/footer.jsp" %>
+<%@ include file="/layouts/end.jsp" %>

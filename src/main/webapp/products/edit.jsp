@@ -1,9 +1,12 @@
 <%@ page import="backend.product.entity.Product" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ include file="/layouts/header.jsp" %>
-    <% Product product = (Product) request.getAttribute("product"); %>
+<%@ include file="/layouts/navbar.jsp" %>
     <div class="container">
-        <%@ include file="/layouts/navbar.jsp" %>
+        <div class="page-section">
+            <h4>Edit Product</h4>
+        </div>
+        <% Product product = (Product) request.getAttribute("product"); %>
         <form method="post">
             <input type="hidden" name="id" value="<%=product.getId()%>">
             <div class="form-group">
@@ -35,3 +38,4 @@
         </form>
     </div>
 <%@ include file="/layouts/footer.jsp" %>
+<%@ include file="/layouts/end.jsp" %>
