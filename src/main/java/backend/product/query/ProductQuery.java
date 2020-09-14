@@ -1,7 +1,6 @@
 package backend.product.query;
 
 import backend.product.entity.Product;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -125,7 +124,6 @@ public class ProductQuery {
 
         return statement;
     }
-
 
     /**
      * Add prepared statement parameters which is both useful for creating
