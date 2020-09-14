@@ -1,4 +1,4 @@
-package backend.database;
+package backend.database.connector;
 
 public enum DatabaseType {
     DEFAULT, TEST

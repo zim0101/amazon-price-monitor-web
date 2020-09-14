@@ -1,4 +1,4 @@
-package backend.database;
+package backend.database.connector;
 
 public enum JdbcFilePath {
     DEFAULT("/home/trex/Development/JavaArea/web.amazon.price.notifier/src/" +
