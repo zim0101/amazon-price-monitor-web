@@ -1,9 +1,10 @@
 package backend.product.repository;
 
-import backend.product.entity.Product;
 
+import backend.product.entity.Product;
 import java.util.Optional;
 import java.util.Set;
+
 
 public interface ProductRepository {
     /**
@@ -48,4 +49,43 @@ public interface ProductRepository {
      * @return true if deleted or false if not.
      */
     boolean delete(int id);
+
+    /**
+     * Filter products by its name using search string
+     *
+     * @param searchString String to search products by name
+     * @return Optional Product set
+     */
+    Optional<Set<Product>> filterProductsByName(String searchString);
+
+    /**
+     * Filter products by its price with given price
+     *
+     * @param price given price to filter products
+     * @return Optional Product set
+     */
+    Optional<Set<Product>> filterProductsByPrice(Double price);
+
+    /**
+     * Filter products by its price with given price range
+     *
+     * @param min range of price
+     * @param max range of price
+     * @return Optional set of product
+     */
+    Optional<Set<Product>> filterProductsByPriceRange(Double min, Double max);
+
+    /**
+     * Sort products by name in descending order
+     *
+     * @return Optional set of product
+     */
+    Optional<Set<Product>> getProductsInDescendingOrderByName();
+
+    /**
+     * Sort products by price in descending order
+     *
+     * @return Optional set of product
+     */
+    Optional<Set<Product>> getProductsInDescendingOrderByPrice();
 }

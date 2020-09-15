@@ -1,9 +1,11 @@
 package backend.product.query;
 
+
 import backend.product.entity.Product;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+
 
 public class ProductQuery {
     /**
@@ -43,17 +45,34 @@ public class ProductQuery {
      * Prepares query statement for finding all products in a price range.
      *
      * @param connection Database connection
-     * @param upperRange upper range of product price
      * @param lowerRange lower range of product price
+     * @param upperRange upper range of product price
      * @return PreparedStatement
      * @throws SQLException SQL Exception
      */
-    public static PreparedStatement findByPriceRange(Connection connection, double upperRange,
-                                                     double lowerRange) throws SQLException {
+    public static PreparedStatement findByPriceRange(Connection connection, double lowerRange,
+                                                     double upperRange) throws SQLException {
         PreparedStatement preparedStatement = connection.prepareStatement(
                 "select * from products where price >= ? and price <= ?");
         preparedStatement.setDouble(1, lowerRange);
         preparedStatement.setDouble(2, upperRange);
+
+        return preparedStatement;
+    }
+
+    /**
+     * Search products by name using search string
+     *
+     * @param connection Database connection
+     * @param searchString string to search in name column
+     * @return PreparedStatement
+     * @throws SQLException SQL Exception
+     */
+    public static PreparedStatement findByProductName(Connection connection, String searchString)
+            throws SQLException {
+        PreparedStatement preparedStatement = connection.prepareStatement(
+                "select * from products where name LIKE ?;");
+        preparedStatement.setString(1, "%" + searchString + "%");
 
         return preparedStatement;
     }
@@ -68,6 +87,32 @@ public class ProductQuery {
     public static PreparedStatement findAll(Connection connection) throws SQLException {
         return connection.prepareStatement("select * from products");
     }
+
+    /**
+     * Order all products in descending order by product name
+     *
+     * @param connection Database connection
+     * @return PreparedStatement
+     * @throws SQLException SQL Exception
+     */
+    public static PreparedStatement productsInDescendingOrderByName(Connection connection)
+            throws SQLException {
+        return connection.prepareStatement("select * from products order by name desc;");
+    }
+
+    /**
+     * Order all products in descending order by product name
+     *
+     * @param connection Database connection
+     * @return PreparedStatement
+     * @throws SQLException SQL Exception
+     */
+    public static PreparedStatement productsInDescendingOrderByPrice(Connection connection)
+            throws SQLException {
+        return connection.prepareStatement("select * from products order by price desc;");
+    }
+
+
 
     /**
      * Prepares query statement for creating a product.

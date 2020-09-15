@@ -11,9 +11,8 @@ import org.slf4j.LoggerFactory;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.LinkedHashSet;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
+
 
 public class ProductRepositoryImpl implements ProductRepository {
 
@@ -71,8 +70,7 @@ public class ProductRepositoryImpl implements ProductRepository {
                 return Optional.of(buildProduct(resultSet));
             }
         } catch (SQLException | ClassNotFoundException exception) {
-            logger.error("Product Query Exception (Exception occurred while finding a product): "
-                    , exception);
+            logger.error("Product Query Exception: " , exception);
             exception.printStackTrace();
         }
 
@@ -89,12 +87,10 @@ public class ProductRepositoryImpl implements ProductRepository {
     public Optional<Set<Product>> findAll() {
         try (Connection connection = new DBConnector(defaultDBConfig.getDatabase()).connection()) {
             ResultSet resultSet = ProductQuery.findAll(connection).executeQuery();
-            System.out.println(resultSet);
 
             return buildSetOfProduct(resultSet);
         } catch (SQLException | ClassNotFoundException exception) {
-            logger.error("Product Query Exception (Exception occurred while finding all products)" +
-                    ": ", exception);
+            logger.error("Product Query Exception: ", exception);
             exception.printStackTrace();
         }
 
@@ -115,8 +111,7 @@ public class ProductRepositoryImpl implements ProductRepository {
         try (Connection connection = new DBConnector(defaultDBConfig.getDatabase()).connection()) {
             rowsAffect = ProductQuery.create(product, connection).executeUpdate();
         } catch (SQLException | ClassNotFoundException exception) {
-            logger.error("Product Query Exception (Exception occurred while creating product): ",
-                    exception);
+            logger.error("Product Query Exception: ", exception);
             exception.printStackTrace();
         }
 
@@ -137,14 +132,19 @@ public class ProductRepositoryImpl implements ProductRepository {
 
             rowsAffect = ProductQuery.update(product, connection).executeUpdate();
         } catch (SQLException | ClassNotFoundException exception) {
-            logger.error("Product Query Exception (Exception occurred while updating a product): ",
-                    exception);
+            logger.error("Product Query Exception: ", exception);
             exception.printStackTrace();
         }
 
         return rowsAffect > 0;
     }
 
+    /**
+     * Delete product by id
+     *
+     * @param id product id.
+     * @return boolean
+     */
     @Override
     public boolean delete(int id) {
         int rowsAffect = 0;
@@ -152,11 +152,113 @@ public class ProductRepositoryImpl implements ProductRepository {
 
             rowsAffect = ProductQuery.delete(id, connection).executeUpdate();
         } catch (SQLException | ClassNotFoundException exception) {
-            logger.error("Product Query Exception (Exception occurred while updating a product): ",
+            logger.error("Product Query Exception: ",
                     exception);
             exception.printStackTrace();
         }
 
         return rowsAffect > 0;
+    }
+
+    /**
+     * Filter products by its name using search string
+     *
+     * @param searchString String to search products by name
+     * @return Optional Product set
+     */
+    @Override
+    public Optional<Set<Product>> filterProductsByName(String searchString) {
+        try (Connection connection = new DBConnector(defaultDBConfig.getDatabase()).connection()) {
+            ResultSet resultSet = ProductQuery.findByProductName(connection, searchString)
+                    .executeQuery();
+
+            return buildSetOfProduct(resultSet);
+        } catch (SQLException | ClassNotFoundException exception) {
+            logger.error("Product Query Exception: ", exception);
+            exception.printStackTrace();
+        }
+
+        return Optional.empty();
+    }
+
+    /**
+     * Filter products by its price with given price
+     *
+     * @param price given price to filter products
+     * @return Optional Product set
+     */
+    @Override
+    public Optional<Set<Product>> filterProductsByPrice(Double price) {
+        try (Connection connection = new DBConnector(defaultDBConfig.getDatabase()).connection()) {
+            ResultSet resultSet = ProductQuery.findByPrice(connection, price).executeQuery();
+
+            return buildSetOfProduct(resultSet);
+        } catch (SQLException | ClassNotFoundException exception) {
+            logger.error("Product Query Exception: ", exception);
+            exception.printStackTrace();
+        }
+
+        return Optional.empty();
+    }
+
+    /**
+     * Filter products by its price with given price range
+     *
+     * @param min range of price
+     * @param max range of price
+     * @return Optional set of product
+     */
+    @Override
+    public Optional<Set<Product>> filterProductsByPriceRange(Double min, Double max) {
+        try (Connection connection = new DBConnector(defaultDBConfig.getDatabase()).connection()) {
+            ResultSet resultSet = ProductQuery.findByPriceRange(connection, min, max).executeQuery();
+
+            return buildSetOfProduct(resultSet);
+        } catch (SQLException | ClassNotFoundException exception) {
+            logger.error("Product Query Exception: ", exception);
+            exception.printStackTrace();
+        }
+
+        return Optional.empty();
+    }
+
+    /**
+     * Sort products by name in descending order
+     *
+     * @return Optional set of product
+     */
+    @Override
+    public Optional<Set<Product>> getProductsInDescendingOrderByName() {
+        try (Connection connection = new DBConnector(defaultDBConfig.getDatabase()).connection()) {
+            ResultSet resultSet = ProductQuery.productsInDescendingOrderByName(connection)
+                    .executeQuery();
+
+            return buildSetOfProduct(resultSet);
+        } catch (SQLException | ClassNotFoundException exception) {
+            logger.error("Product Query Exception: ", exception);
+            exception.printStackTrace();
+        }
+
+        return Optional.empty();
+    }
+
+    /**
+     * Sort products by price in descending order
+     *
+     * @return Optional set of product
+     */
+    @Override
+    public Optional<Set<Product>> getProductsInDescendingOrderByPrice() {
+        try (Connection connection = new DBConnector(defaultDBConfig.getDatabase()).connection()) {
+            ResultSet resultSet = ProductQuery.productsInDescendingOrderByPrice(connection)
+                    .executeQuery();
+
+            return buildSetOfProduct(resultSet);
+        } catch (SQLException | ClassNotFoundException exception) {
+            logger.error("Product Query Exception: ", exception);
+            exception.printStackTrace();
+        }
+
+        return Optional.empty();
     }
 }
