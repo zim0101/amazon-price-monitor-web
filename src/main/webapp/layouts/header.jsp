@@ -30,8 +30,8 @@
             color: #e5cc15;
         }
         .page-section {
-            margin-top: 20px;
-            margin-bottom: 20px;
+            margin-top: 40px;
+            margin-bottom: 50px;
         }
         .highcharts-figure, .highcharts-data-table table {
             min-width: 360px;

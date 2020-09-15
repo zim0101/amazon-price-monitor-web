@@ -14,6 +14,14 @@ import java.util.List;
 @WebServlet(urlPatterns = "/products/graph")
 public class ProductPriceGraphServlet extends HttpServlet {
 
+    /**
+     * Get price history of a specific product.
+     *
+     * @param request HttpServletRequest
+     * @param response HttpServletResponse
+     * @throws ServletException ServletException
+     * @throws IOException IOException
+     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

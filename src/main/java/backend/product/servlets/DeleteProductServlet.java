@@ -12,6 +12,13 @@ import java.io.IOException;
 @WebServlet(name = "DeleteProduct", urlPatterns = "/products/delete")
 public class DeleteProductServlet extends HttpServlet {
 
+    /**
+     * Delete product by table id
+     *
+     * @param request HttpServletRequest
+     * @param response HttpServletResponse
+     * @throws IOException IOException
+     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws IOException {

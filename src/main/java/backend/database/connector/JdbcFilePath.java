@@ -1,5 +1,8 @@
 package backend.database.connector;
 
+/**
+ * Jdbc property file. Add new path here if added one
+ */
 public enum JdbcFilePath {
     DEFAULT("/home/trex/Development/JavaArea/web.amazon.price.notifier/src/" +
             "main/resources/jdbc.properties"),

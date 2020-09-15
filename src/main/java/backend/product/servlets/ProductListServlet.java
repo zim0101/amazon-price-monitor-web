@@ -17,6 +17,14 @@ import java.util.Set;
 @WebServlet(name = "ProductList", urlPatterns = "/products/list")
 public class ProductListServlet extends HttpServlet {
 
+    /**
+     * Get all products.
+     *
+     * @param request HttpServletRequest
+     * @param response HttpServletResponse
+     * @throws ServletException ServletException
+     * @throws IOException IOException
+     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

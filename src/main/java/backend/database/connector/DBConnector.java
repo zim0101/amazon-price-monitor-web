@@ -78,6 +78,9 @@ public class DBConnector {
         return DriverManager.getConnection(url, username, password);
     }
 
+    /**
+     * @return url
+     */
     public String getUrl() {
         return this.url;
     }

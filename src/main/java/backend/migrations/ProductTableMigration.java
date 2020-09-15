@@ -1,4 +1,4 @@
-package backend.database.migrations;
+package backend.migrations;
 
 import backend.database.migrate.Migration;
 import backend.database.utils.QueryExecutor;

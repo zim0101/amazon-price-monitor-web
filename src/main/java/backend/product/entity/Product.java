@@ -71,54 +71,93 @@ public class Product {
         this.nameSelector = nameSelector;
     }
 
+    /**
+     * @return Product Id
+     */
     public int getId() {
         return id;
     }
 
+    /**
+     * @return Product Name
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * @param name Product Name
+     */
     public void setName(String name) {
         this.name = name;
     }
 
+    /**
+     * @return Product Price
+     */
     public double getPrice() {
         return price;
     }
 
+    /**
+     * @param price Product Price
+     */
     public void setPrice(double price) {
         this.price = price;
     }
 
+    /**
+     * @return Product Vendor
+     */
     public String getVendor() {
         return vendor;
     }
 
+    /**
+     * @param vendor Product Vendor
+     */
     public void setVendor(String vendor) {
         this.vendor = vendor;
     }
 
+    /**
+     * @return Product Url
+     */
     public String getUrl() {
         return url;
     }
 
+    /**
+     * @param url Product Url
+     */
     public void setUrl(String url) {
         this.url = url;
     }
 
+    /**
+     * @return Product PriceSelector
+     */
     public String getPriceSelector() {
         return priceSelector;
     }
 
+    /**
+     * @param priceSelector Product PriceSelector
+     */
     public void setPriceSelector(String priceSelector) {
         this.priceSelector = priceSelector;
     }
 
+    /**
+     * @return Product NameSelector
+     */
     public String getNameSelector() {
         return nameSelector;
     }
 
+    /**
+     * @param nameSelector Product NameSelector
+     */
     public void setNameSelector(String nameSelector) {
         this.nameSelector = nameSelector;
     }

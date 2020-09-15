@@ -1,5 +1,6 @@
 package backend.product.repository;
 
+
 import backend.database.connector.DBConfig;
 import backend.database.connector.DBConnector;
 import backend.database.connector.DatabaseType;
@@ -11,6 +12,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.*;
+
 
 public class ProductPriceHistoryRepositoryImpl implements ProductPriceHistoryRepository {
 

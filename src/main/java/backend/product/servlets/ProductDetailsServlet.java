@@ -16,6 +16,14 @@ import java.util.Optional;
 @WebServlet(name = "ProductDetails", urlPatterns = "/products/details")
 public class ProductDetailsServlet extends HttpServlet {
 
+    /**
+     * Get specific product details.
+     *
+     * @param request HttpServletRequest
+     * @param response HttpServletResponse
+     * @throws ServletException ServletException
+     * @throws IOException IOException
+     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

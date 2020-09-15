@@ -24,6 +24,8 @@ public class EditProductServlet extends HttpServlet {
     }
 
     /**
+     * Forwards request to edit page.
+     *
      * @param request HttpServletRequest
      * @param response HttpServletResponse
      * @throws ServletException ServletException
@@ -40,6 +42,8 @@ public class EditProductServlet extends HttpServlet {
     }
 
     /**
+     * Handles form submission to update product.
+     *
      * @param request HttpServletRequest
      * @param response HttpServletResponse
      * @throws IOException IOException

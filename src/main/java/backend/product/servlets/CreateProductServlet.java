@@ -23,6 +23,8 @@ public class CreateProductServlet extends HttpServlet {
     }
 
     /**
+     * Forwards request to create.jsp
+     *
      * @param request HttpServletRequest
      * @param response HttpServletResponse
      * @throws ServletException Servlet Exception
@@ -36,6 +38,8 @@ public class CreateProductServlet extends HttpServlet {
     }
 
     /**
+     * Handles form submission to create product.
+     *
      * @param request HttpServletRequest
      * @param response HttpServletResponse
      * @throws IOException IO Exception

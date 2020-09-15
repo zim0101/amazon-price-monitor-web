@@ -11,11 +11,15 @@ import java.util.Properties;
  * DBConfig class contains multiple database configurations.
  */
 public class DBConfig {
+
     /**
      * Database configuration
      */
     protected final Map<String, String> database = new HashMap<>();
 
+    /**
+     * @param db DatabaseType
+     */
     public DBConfig(DatabaseType db) {
         Properties jdbcProperty = switch (db) {
             case DEFAULT -> readPropertiesFile(JdbcFilePath.DEFAULT.path);
