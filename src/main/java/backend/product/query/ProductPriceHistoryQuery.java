@@ -1,6 +1,8 @@
 package backend.product.query;
 
 
+import backend.product.entity.ProductPriceHistory;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -29,6 +31,19 @@ public class ProductPriceHistoryQuery {
                 "order by date;";
         PreparedStatement preparedStatement = connection.prepareStatement(query);
         preparedStatement.setInt(1, id);
+
+        return preparedStatement;
+    }
+
+    public static PreparedStatement create(Connection connection,
+                                           ProductPriceHistory productPriceHistory)
+            throws SQLException {
+        String query = "insert into product_price_histories (product_id, price, `date`) " +
+                "values (?, ?, ?)";
+        PreparedStatement preparedStatement = connection.prepareStatement(query);
+        preparedStatement.setInt(1, productPriceHistory.getProductId());
+        preparedStatement.setDouble(2, productPriceHistory.getPrice());
+        preparedStatement.setString(3, productPriceHistory.getDate());
 
         return preparedStatement;
     }

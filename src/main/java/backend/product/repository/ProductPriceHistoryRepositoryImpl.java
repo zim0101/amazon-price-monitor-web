@@ -5,7 +5,9 @@ import backend.database.connector.DBConfig;
 import backend.database.connector.DBConnector;
 import backend.database.connector.DatabaseType;
 import backend.product.dto.ProductPriceDTO;
+import backend.product.entity.ProductPriceHistory;
 import backend.product.query.ProductPriceHistoryQuery;
+import backend.product.query.ProductQuery;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import java.sql.Connection;
@@ -73,5 +75,19 @@ public class ProductPriceHistoryRepositoryImpl implements ProductPriceHistoryRep
         }
 
         return historyList;
+    }
+
+    public boolean create(ProductPriceHistory productPriceHistory) {
+        int rowsAffect = 0;
+
+        try (Connection connection = new DBConnector(defaultDBConfig.getDatabase()).connection()) {
+            rowsAffect = ProductPriceHistoryQuery.create(connection, productPriceHistory)
+                    .executeUpdate();
+        } catch (SQLException | ClassNotFoundException exception) {
+            logger.error("Product Query Exception: ", exception);
+            exception.printStackTrace();
+        }
+
+        return rowsAffect > 0;
     }
 }
