@@ -2,6 +2,8 @@ package backend.scheduler;
 
 
 import backend.product.entity.Product;
+import backend.product.entity.ProductPriceHistory;
+import backend.product.repository.ProductPriceHistoryRepositoryImpl;
 import backend.product.repository.ProductRepositoryImpl;
 import dorkbox.notify.Notify;
 import org.jsoup.Jsoup;
@@ -37,12 +39,18 @@ public class PriceScrappingScheduler {
     public ProductRepositoryImpl productRepository;
 
     /**
+     * ProductPriceHistoryRepositoryImpl
+     */
+    public ProductPriceHistoryRepositoryImpl productPriceHistoryRepository;
+
+    /**
      * Initiate threadPoolExecutor with 5 threads.
      * Initialize productRepository object.
      */
     public PriceScrappingScheduler() {
         threadPoolExecutor = (ThreadPoolExecutor) Executors.newFixedThreadPool(5);
         productRepository = new ProductRepositoryImpl();
+        productPriceHistoryRepository = new ProductPriceHistoryRepositoryImpl();
     }
 
     /**
@@ -65,7 +73,7 @@ public class PriceScrappingScheduler {
         if (optionalProductSet.isPresent()) {
             Set<Product> productSet = optionalProductSet.get();
             productSet.forEach(product ->
-                    threadPoolExecutor.submit(() -> calculatePriceAndSendNotification(product))
+                    threadPoolExecutor.submit(() -> updatePriceAndSendNotification(product))
             );
         }
     }
@@ -77,15 +85,23 @@ public class PriceScrappingScheduler {
      *
      * @param product Product
      */
-    public void calculatePriceAndSendNotification(Product product) {
+    public void updatePriceAndSendNotification(Product product) {
         try {
             double currentPrice = crawlAndGetCurrentPrice(product.getUrl(),
                                                           product.getPriceSelector());
             PriceState priceState = comparePrice(currentPrice, product.getPrice());
+            if (priceState != PriceState.STABLE) updatePriceAndCreateHistory(product, currentPrice);
             notifier(priceState, product.getName(), currentPrice);
         } catch (IOException exception) {
             exception.printStackTrace();
         }
+    }
+
+    public void updatePriceAndCreateHistory(Product product, double currentPrice) {
+        productPriceHistoryRepository.create(new ProductPriceHistory(product.getId(),
+                currentPrice));
+        product.setPrice(currentPrice);
+        productRepository.update(product);
     }
 
     /**
