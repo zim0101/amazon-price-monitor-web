@@ -23,7 +23,8 @@ public class ProductPriceHistoryQuery {
                 "       product_price_histories.price,\n" +
                 "       product_price_histories.date\n" +
                 "from products\n" +
-                "    left join product_price_histories on products.id = product_price_histories.product_id\n" +
+                "    left join product_price_histories " +
+                "on products.id = product_price_histories.product_id\n" +
                 "where products.id = ?\n" +
                 "order by date;";
         PreparedStatement preparedStatement = connection.prepareStatement(query);
